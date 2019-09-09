@@ -10,7 +10,7 @@ const credentials = JSON.parse(fs.readFileSync('../credentials.json').toString()
 const port = 3000
 
 let db = null
-let school = null
+let university = null
 let program = null
 let applicant = null
 let application = null
@@ -27,9 +27,9 @@ app.get('/application', async (req, res) => {
   res.send(results)
 })
 
-app.get('/school', async (req, res) => {
+app.get('/university', async (req, res) => {
   let filter = req.query.filter ? JSON.parse(req.query.filter) : {}
-  let results = await school.find(filter).toArray()
+  let results = await university.find(filter).toArray()
   res.send(results)
 })
 
@@ -60,16 +60,67 @@ app.put('/applicant', async (req, res) => {
   }
 })
 
-app.put('/application', (req, res) => {
-  
+app.put('/application', async (req, res) => {
+  if (! req.body.data) {
+    res.send('no data')
+    return
+  }
+  try {
+    let data = JSON.parse(req.body.data)
+    let filter = { url: data.url }
+    let exist = await application.findOne(filter)
+    if (exist) {
+      await application.updateOne(filter, { $set: Object.assign(exist, data) })
+    } else {
+      await application.insertOne(data)
+    }
+    res.send('ok')
+  } catch(err) {
+    console.log(err)
+    res.send('failed')
+  }
 })
 
-app.put('/school', (req, res) => {
-
+app.put('/university', async (req, res) => {
+  if (! req.body.data) {
+    res.send('no data')
+    return
+  }
+  try {
+    let data = JSON.parse(req.body.data)
+    let filter = { name: data.name }
+    let exist = await university.findOne(filter)
+    if (exist) {
+      await university.updateOne(filter, { $set: Object.assign(exist, data) })
+    } else {
+      await university.insertOne(data)
+    }
+    res.send('ok')
+  } catch(err) {
+    console.log(err)
+    res.send('failed')
+  }
 })
 
-app.put('/program', (req, res) => {
-
+app.put('/program', async (req, res) => {
+  if (! req.body.data) {
+    res.send('no data')
+    return
+  }
+  try {
+    let data = JSON.parse(req.body.data)
+    let filter = { university: data.university, name: data.name }
+    let exist = await program.findOne(filter)
+    if (exist) {
+      await program.updateOne(filter, { $set: Object.assign(exist, data) })
+    } else {
+      await program.insertOne(data)
+    }
+    res.send('ok')
+  } catch(err) {
+    console.log(err)
+    res.send('failed')
+  }
 })
 
 async function init() {
@@ -80,20 +131,9 @@ async function init() {
   db = db.db('go_abroad')
   applicant = db.collection('applicant')
   application = db.collection('application')
-  school = db.collection('school')
+  university = db.collection('university')
   program = db.collection('program')
   app.listen(port)
-
-  let res = await axios.get(`http://localhost:${port}/applicant`, {
-    params: {
-      filter: `{"id": "CarrotParsley"}`
-    }
-  })
-  console.log(res.data)
-  res = await axios.put(`http://localhost:${port}/applicant`, {
-    data: `{"id": "CarrotParsley", "newattr": "hi!"}`
-  })
-  console.log(res.data)
 }
 
 init()

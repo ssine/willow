@@ -15,6 +15,7 @@ let applicant: Collection
 let application: Collection
 
 app.get('/applicant', async (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
   let filter = req.query.filter ? JSON.parse(req.query.filter) : {}
   let results = await applicant.find(filter).toArray()
   res.send(results)
@@ -27,6 +28,7 @@ app.get('/application', async (req, res) => {
 })
 
 app.get('/university', async (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
   let filter = req.query.filter ? JSON.parse(req.query.filter) : {}
   let results = await university.find(filter).toArray()
   res.send(results)

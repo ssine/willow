@@ -1,3 +1,9 @@
+import * as fs from 'fs'
+import axios from 'axios'
+
+const config = JSON.parse(fs.readFileSync('../config.json').toString())
+let port: number = config.port
+
 async function run_test() {
   let res = await axios.get(`http://localhost:${port}/applicant`, {
     params: {
@@ -43,3 +49,5 @@ async function run_test() {
   })
   console.log(res.data)
 }
+
+run_test()

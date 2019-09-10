@@ -1,19 +1,18 @@
-const fs = require('fs')
-const axios = require('axios')
-const express = require('express')
-const bodyParser = require('body-parser')
-const MongoClient = require('mongodb').MongoClient
+import * as fs from 'fs'
+import * as express from 'express'
+import * as bodyParser from 'body-parser'
+import { MongoClient, Collection, Db } from 'mongodb'
 const app = express()
 app.use(bodyParser.json())
 
-const credentials = JSON.parse(fs.readFileSync('../credentials.json').toString())
-const port = 3000
+const credentials = JSON.parse(fs.readFileSync('credentials.json').toString())
+const config = JSON.parse(fs.readFileSync('config.json').toString())
 
-let db = null
-let university = null
-let program = null
-let applicant = null
-let application = null
+let db: Db
+let university: Collection
+let program: Collection
+let applicant: Collection
+let application: Collection
 
 app.get('/applicant', async (req, res) => {
   let filter = req.query.filter ? JSON.parse(req.query.filter) : {}
@@ -124,16 +123,17 @@ app.put('/program', async (req, res) => {
 })
 
 async function init() {
-  db = await MongoClient.connect(credentials.mongodb_uri, {
+  let client = await MongoClient.connect(credentials.mongodb_uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
-  db = db.db('go_abroad')
+  db = client.db('go_abroad')
   applicant = db.collection('applicant')
   application = db.collection('application')
   university = db.collection('university')
   program = db.collection('program')
-  app.listen(port)
+  app.listen(config.port, config.host)
+  console.log(`server listining on ${config.host}:${config.port}`)
 }
 
 init()

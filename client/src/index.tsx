@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './style/index.scss';
-import Main from './main';
-import Universities  from './components/universities';
-import University  from './components/university';
+import Main from './page/main';
+import Universities  from './page/universities';
+import University  from './component/university-card';
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 
 const routing = (

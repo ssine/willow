@@ -5,9 +5,9 @@ interface UniversityCardProp {
   university?: University
 }
 
-const UniversityCard: React.SFC<UniversityCardProp> = props => (
+const UniversityCard: React.SFC<UniversityCardProp> = props =>
   <div className="university-card">
-    { props.university ? 
+    { props.university ?
       <div>
         <div className="name">
           <span>{props.university.name}</span>
@@ -16,10 +16,9 @@ const UniversityCard: React.SFC<UniversityCardProp> = props => (
         <p>{JSON.stringify(props.university.location)}</p>
         <p>{JSON.stringify(props.university.csrankings_rank)}</p>
       </div>
-    : 
+    :
       <p>university not set</p>
     }
   </div>
-)
 
 export default UniversityCard

@@ -5,6 +5,7 @@ export interface University {
     latitude: number
     longitude: number
   }
+  csrankings_rank?: number
 }
 
 interface TOEFLScore {

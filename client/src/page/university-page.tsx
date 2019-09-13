@@ -1,7 +1,6 @@
 import React from 'react'
-import axios from 'axios'
-import { api_uri } from '../config'
 import { University } from '../util/type'
+import { get_all_universities } from '../util/helper'
 
 class UniversityPage extends React.Component<{}, {universities: University[]}> {
   constructor(prop: any) {
@@ -12,21 +11,15 @@ class UniversityPage extends React.Component<{}, {universities: University[]}> {
   }
 
   async componentDidMount() {
-    let res = await axios.get(`${api_uri}university`, {
-      params: {
-        filter: `{}`
-      }
-    })
-    console.log(res.data)
+    let universities = await get_all_universities();
     this.setState({
-      universities: res.data
+      universities: universities
     })
-    console.log('done')
   }
 
   render() {
     return (
-      <div className="Universities">
+      <div className="university-page">
         <ul>
           {this.state.universities.map(u => 
             <li key={u.name}>

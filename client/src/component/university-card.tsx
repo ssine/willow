@@ -1,52 +1,25 @@
 import React from 'react'
-import axios from 'axios'
-import { RouteComponentProps } from 'react-router-dom'
-import { api_uri } from '../config'
 import { University } from '../util/type'
 
-interface MatchParams {
-  name: string
+interface UniversityCardProp {
+  university?: University
 }
 
-interface Props extends RouteComponentProps<MatchParams> {
-}
-
-
-class UniversityCard extends React.Component<Props, {university?: University}> {
-  constructor(prop: any) {
-    super(prop)
-    this.state = {  }
-  }
-
-  async componentDidMount() {
-    const { params } = this.props.match
-    let res = await axios.get(`${api_uri}university`, {
-      params: {
-        filter: `{"name": "${params.name}"}`
-      }
-    })
-    console.log(res.data)
-    this.setState({
-      university: res.data[0]
-    })
-    console.log('done')
-  }
-
-  render() {
-    return (
-      <div className="university">
-        { this.state.university ? 
-          <div>
-            <p>{this.state.university.name}</p>
-            <p>{this.state.university.abbreviations[0]}</p>
-            <p>{JSON.stringify(this.state.university.location)}</p>
-          </div>
-        : 
-          <p>null</p>
-        }
+const UniversityCard: React.SFC<UniversityCardProp> = props => (
+  <div className="university-card">
+    { props.university ? 
+      <div>
+        <div className="name">
+          <span>{props.university.name}</span>
+          <span>({props.university.abbreviations.map(v => v)})</span>
+        </div>
+        <p>{JSON.stringify(props.university.location)}</p>
+        <p>{JSON.stringify(props.university.csrankings_rank)}</p>
       </div>
-    )
-  }
-}
+    : 
+      <p>university not set</p>
+    }
+  </div>
+)
 
 export default UniversityCard

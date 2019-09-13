@@ -84,7 +84,7 @@ export interface Application {
   degree: string
   program: string
   semester: string
-  result: string
+  result: "OFFER" | "AD" | "WL" | "REJ"
   country: string
   info: string
   url: string

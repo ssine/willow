@@ -1,6 +1,6 @@
 export interface University {
   name: string
-  abbreviation: string[]
+  abbreviations: string[]
   location?: {
     latitude: number
     longitude: number

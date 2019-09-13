@@ -1,23 +1,23 @@
-import React from 'react';
-import axios from 'axios';
-import { api_uri } from '../config';
+import React from 'react'
+import axios from 'axios'
+import { api_uri } from '../config'
 
 interface University {
-  name: string;
-  abbreviation_list: string[];
+  name: string
+  abbreviation_list: string[]
   location?: {
-    latitude: number;
-    longitude: number;
+    latitude: number
+    longitude: number
   }
 }
 
 
 class Universities extends React.Component<{}, {universities: University[]}> {
   constructor(prop: any) {
-    super(prop);
+    super(prop)
     this.state = {
       universities: []
-    };
+    }
   }
 
   async componentDidMount() {
@@ -25,12 +25,12 @@ class Universities extends React.Component<{}, {universities: University[]}> {
       params: {
         filter: `{}`
       }
-    });
-    console.log(res.data);
+    })
+    console.log(res.data)
     this.setState({
       universities: res.data
-    });
-    console.log('done');
+    })
+    console.log('done')
   }
 
   render() {
@@ -48,4 +48,4 @@ class Universities extends React.Component<{}, {universities: University[]}> {
   }
 }
 
-export default Universities;
+export default Universities

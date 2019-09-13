@@ -1,19 +1,19 @@
-import React from 'react';
-import axios from 'axios';
-import { RouteComponentProps } from 'react-router-dom';
-import { api_uri } from '../config';
+import React from 'react'
+import axios from 'axios'
+import { RouteComponentProps } from 'react-router-dom'
+import { api_uri } from '../config'
 
 interface University {
-  name: string;
-  abbreviation: string[];
+  name: string
+  abbreviation: string[]
   location?: {
-    latitude: number;
-    longitude: number;
+    latitude: number
+    longitude: number
   }
 }
 
 interface MatchParams {
-  name: string;
+  name: string
 }
 
 interface Props extends RouteComponentProps<MatchParams> {
@@ -22,22 +22,22 @@ interface Props extends RouteComponentProps<MatchParams> {
 
 class University extends React.Component<Props, {university?: University}> {
   constructor(prop: any) {
-    super(prop);
-    this.state = {  };
+    super(prop)
+    this.state = {  }
   }
 
   async componentDidMount() {
-    const { params } = this.props.match;
+    const { params } = this.props.match
     let res = await axios.get(`${api_uri}university`, {
       params: {
         filter: `{"name": "${params.name}"}`
       }
-    });
-    console.log(res.data);
+    })
+    console.log(res.data)
     this.setState({
       university: res.data[0]
-    });
-    console.log('done');
+    })
+    console.log('done')
   }
 
   render() {
@@ -57,4 +57,4 @@ class University extends React.Component<Props, {university?: University}> {
   }
 }
 
-export default University;
+export default University

@@ -1,8 +1,8 @@
-import React from 'react';
+import React from 'react'
 
 class Main extends React.Component {
   constructor(prop: any) {
-    super(prop);
+    super(prop)
   }
 
   render() {
@@ -26,4 +26,4 @@ class Main extends React.Component {
   }
 }
 
-export default Main;
+export default Main

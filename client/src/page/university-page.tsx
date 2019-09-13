@@ -1,18 +1,9 @@
 import React from 'react'
 import axios from 'axios'
 import { api_uri } from '../config'
+import { University } from '../util/type'
 
-interface University {
-  name: string
-  abbreviation_list: string[]
-  location?: {
-    latitude: number
-    longitude: number
-  }
-}
-
-
-class Universities extends React.Component<{}, {universities: University[]}> {
+class UniversityPage extends React.Component<{}, {universities: University[]}> {
   constructor(prop: any) {
     super(prop)
     this.state = {
@@ -48,4 +39,4 @@ class Universities extends React.Component<{}, {universities: University[]}> {
   }
 }
 
-export default Universities
+export default UniversityPage

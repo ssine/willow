@@ -2,15 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { RouteComponentProps } from 'react-router-dom'
 import { api_uri } from '../config'
-
-interface University {
-  name: string
-  abbreviation: string[]
-  location?: {
-    latitude: number
-    longitude: number
-  }
-}
+import { University } from '../util/type'
 
 interface MatchParams {
   name: string
@@ -20,7 +12,7 @@ interface Props extends RouteComponentProps<MatchParams> {
 }
 
 
-class University extends React.Component<Props, {university?: University}> {
+class UniversityCard extends React.Component<Props, {university?: University}> {
   constructor(prop: any) {
     super(prop)
     this.state = {  }
@@ -46,7 +38,7 @@ class University extends React.Component<Props, {university?: University}> {
         { this.state.university ? 
           <div>
             <p>{this.state.university.name}</p>
-            <p>{this.state.university.abbreviation[0]}</p>
+            <p>{this.state.university.abbreviations[0]}</p>
             <p>{JSON.stringify(this.state.university.location)}</p>
           </div>
         : 
@@ -57,4 +49,4 @@ class University extends React.Component<Props, {university?: University}> {
   }
 }
 
-export default University
+export default UniversityCard

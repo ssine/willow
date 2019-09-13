@@ -8,18 +8,18 @@ export interface University {
 }
 
 interface TOEFLScore {
-  reading: number
-  listening: number
-  speaking: number
-  writing: number
-  total: number
+  reading: number | null
+  listening: number | null
+  speaking: number | null
+  writing: number | null
+  total: number | null
 }
 
 interface GREScore {
-  verbal: number
-  quant: number
-  AW: number
-  total: number
+  verbal: number | null
+  quant: number | null
+  AW: number | null
+  total: number | null
 }
 
 interface GPA {

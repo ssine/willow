@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './style/index.scss'
 import Main from './page/main'
-import Universities  from './page/universities'
+import UniversityPage  from './page/university-page'
 import University  from './component/university-card'
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
 
@@ -18,7 +18,7 @@ const routing = (
         </li>
       </ul>
       <Route exact path='/' component={Main} />
-      <Route path='/universities' component={Universities} />
+      <Route path='/universities' component={UniversityPage} />
       <Route path='/university/:name' component={University} />
     </div>
   </Router>

@@ -7,6 +7,7 @@ import {
 import { Program, University, Application, Applicant } from '../util/type'
 import GPACard from './gpa-card'
 import GRECard from './gre-card'
+import TOEFLCard from './toefl-card'
 
 interface ApplicationStatisticsCardProp {
   university: University
@@ -96,6 +97,10 @@ class ApplicationStatisticsCard extends
         <GRECard
           positive_GREs={this.state.positive_applicants.map(app => app.GRE)}
           negative_GREs={this.state.negative_applicants.map(app => app.GRE)}
+        />
+        <TOEFLCard
+          positive_TOEFLs={this.state.positive_applicants.map(app => app.TOEFL)}
+          negative_TOEFLs={this.state.negative_applicants.map(app => app.TOEFL)}
         />
       </div>
     :

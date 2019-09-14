@@ -84,8 +84,8 @@ class Histogram extends React.Component<HistogramProp, HistogramState> {
           <XAxis dataKey="x" />
           <YAxis />
           <Tooltip />
-          <Area type="monotone" dataKey="y_pos" stroke="#82ca9d" fill="#82ca9d" />
-          <Area type="monotone" dataKey="y_neg" stroke="pink" fill="#82ca9d" />
+          <Area type="monotone" dataKey="y_neg" stroke="#ffaec9" fill="#ed1c24" />
+          <Area type="monotone" dataKey="y_pos" stroke="#99d9ea" fill="#00a2e8" />
         </AreaChart>
       </div>
     );

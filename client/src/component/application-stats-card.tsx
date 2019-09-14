@@ -6,6 +6,7 @@ import {
 } from '../util/helper'
 import { Program, University, Application, Applicant } from '../util/type'
 import GPACard from './gpa-card'
+import GRECard from './gre-card'
 
 interface ApplicationStatisticsCardProp {
   university: University
@@ -86,18 +87,19 @@ class ApplicationStatisticsCard extends
   }
 
   render() {
-    return (
+    return this.state.positive_applicants && this.state.negative_applicants ?
       <div className="app-stats-card">
-        { this.state.positive_applicants && this.state.negative_applicants ?
-          <GPACard
-            positive_GPAs={this.state.positive_applicants.map(app => app.bachelor.gpa)}
-            negative_GPAs={this.state.negative_applicants.map(app => app.bachelor.gpa)}
-          />
-          :
-          <div>fetching data...</div>
-        }
+        <GPACard
+          positive_GPAs={this.state.positive_applicants.map(app => app.bachelor.gpa)}
+          negative_GPAs={this.state.negative_applicants.map(app => app.bachelor.gpa)}
+        />
+        <GRECard
+          positive_GREs={this.state.positive_applicants.map(app => app.GRE)}
+          negative_GREs={this.state.negative_applicants.map(app => app.GRE)}
+        />
       </div>
-    )
+    :
+      <div>fetching data...</div>
   }
 }
 

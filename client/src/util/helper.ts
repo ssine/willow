@@ -1,5 +1,6 @@
 import { api_uri } from '../config'
 import axios from 'axios'
+import _ from 'lodash'
 import { University, Program, Applicant, Application } from './type'
 
 async function get_all_universities(): Promise<University[]> {
@@ -65,6 +66,16 @@ async function get_applications_by_university(university_name: string): Promise<
   return res.data
 }
 
+async function get_applications_by_university_and_program(
+  university_name: string, program_name: string): Promise<Application[]> {
+  let res = await axios.get(`${api_uri}application`, {
+    params: {
+      filter: `{"university": "${university_name}", "program": "${program_name}"}`
+    }
+  })
+  return res.data
+}
+
 async function get_applications_by_applicant(applicant_id: string): Promise<Application[]> {
   let res = await axios.get(`${api_uri}application`, {
     params: {
@@ -72,6 +83,31 @@ async function get_applications_by_applicant(applicant_id: string): Promise<Appl
     }
   })
   return res.data
+}
+
+function get_histogram_counts(
+  data: number[],
+  range: [number, number],
+  num_bins: number
+): number[] {
+  let interval_counts = _.fill(Array(num_bins), 0)
+  let interval = (range[1] - range[0]) / num_bins
+  data.forEach(v => {
+    if (v === range[1]) interval_counts[num_bins - 1] ++
+    else interval_counts[Math.floor((v - range[0]) / interval)] ++
+  })
+  return interval_counts
+}
+
+function linspace(
+  start: number, end: number, num: number,
+  include_end: boolean = true
+): number[] {
+  let res = Array(num)
+  let step = (end - start) / (num - 1)
+  for (let i = 0; i < num; i++)
+    res[i] = start + i * step
+  return res
 }
 
 export {
@@ -82,5 +118,9 @@ export {
   get_applicant_by_id,
   get_all_applications,
   get_applications_by_university,
-  get_applications_by_applicant
+  get_applications_by_university_and_program,
+  get_applications_by_applicant,
+
+  get_histogram_counts,
+  linspace
 }

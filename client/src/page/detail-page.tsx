@@ -3,6 +3,9 @@ import axios from 'axios'
 import { RouteComponentProps } from 'react-router-dom'
 import { api_uri } from '../config'
 import { University } from '../util/type'
+import UniversityCard from '../component/university-card'
+import ApplicationStatisticsCard from '../component/application-stats-card'
+import { get_university_by_name } from '../util/helper'
 
 interface MatchParams {
   name: string
@@ -11,8 +14,7 @@ interface MatchParams {
 interface Props extends RouteComponentProps<MatchParams> {
 }
 
-
-class UniversityCard extends React.Component<Props, {university?: University}> {
+class DetailsPage extends React.Component<Props, {university?: University}> {
   constructor(prop: any) {
     super(prop)
     this.state = {  }
@@ -20,33 +22,26 @@ class UniversityCard extends React.Component<Props, {university?: University}> {
 
   async componentDidMount() {
     const { params } = this.props.match
-    let res = await axios.get(`${api_uri}university`, {
-      params: {
-        filter: `{"name": "${params.name}"}`
-      }
-    })
-    console.log(res.data)
+    let uni = await get_university_by_name(params.name)
     this.setState({
-      university: res.data[0]
+      university: uni
     })
-    console.log('done')
   }
 
   render() {
     return (
       <div className="university">
-        { this.state.university ? 
-          <div>
-            <p>{this.state.university.name}</p>
-            <p>{this.state.university.abbreviations[0]}</p>
-            <p>{JSON.stringify(this.state.university.location)}</p>
-          </div>
-        : 
-          <p>null</p>
+        <UniversityCard
+          university={this.state.university}
+        />
+        <br/>
+        { this.state.university ?
+          <ApplicationStatisticsCard university={this.state.university} />
+          : <div></div>
         }
       </div>
     )
   }
 }
 
-export default UniversityCard
+export default DetailsPage

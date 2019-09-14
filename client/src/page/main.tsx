@@ -1,9 +1,6 @@
 import React from 'react'
 
 class Main extends React.Component {
-  constructor(prop: any) {
-    super(prop)
-  }
 
   render() {
     return (

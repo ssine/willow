@@ -22,6 +22,7 @@ app.get('/applicant', async (req, res) => {
 })
 
 app.get('/application', async (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
   let filter = req.query.filter ? JSON.parse(req.query.filter) : {}
   let results = await application.find(filter).toArray()
   res.send(results)
@@ -35,12 +36,14 @@ app.get('/university', async (req, res) => {
 })
 
 app.get('/program', async (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
   let filter = req.query.filter ? JSON.parse(req.query.filter) : {}
   let results = await program.find(filter).toArray()
   res.send(results)
 })
 
 app.put('/applicant', async (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
   if (! req.body.data) {
     res.send('no data')
     return
@@ -62,6 +65,7 @@ app.put('/applicant', async (req, res) => {
 })
 
 app.put('/application', async (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
   if (! req.body.data) {
     res.send('no data')
     return
@@ -83,6 +87,7 @@ app.put('/application', async (req, res) => {
 })
 
 app.put('/university', async (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
   if (! req.body.data) {
     res.send('no data')
     return
@@ -104,6 +109,7 @@ app.put('/university', async (req, res) => {
 })
 
 app.put('/program', async (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
   if (! req.body.data) {
     res.send('no data')
     return

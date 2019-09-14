@@ -8,7 +8,7 @@ export interface University {
   csrankings_rank?: number
 }
 
-interface TOEFLScore {
+export interface TOEFLScore {
   reading: number | null
   listening: number | null
   speaking: number | null
@@ -16,14 +16,14 @@ interface TOEFLScore {
   total: number | null
 }
 
-interface GREScore {
+export interface GREScore {
   verbal: number | null
   quant: number | null
   AW: number | null
   total: number | null
 }
 
-interface GPA {
+export interface GPA {
   scale_4?: number
   scale_4_3?: number
   scale_100?: number

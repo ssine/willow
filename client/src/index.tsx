@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import './style/index.scss'
 import Main from './page/main'
 import UniversityPage  from './page/university-page'
+import DetailsPage  from './page/detail-page'
 import University  from './component/university-card'
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
 
@@ -19,7 +20,7 @@ const routing = (
       </ul>
       <Route exact path='/' component={Main} />
       <Route path='/universities' component={UniversityPage} />
-      <Route path='/university/:name' component={University} />
+      <Route path='/university/:name' component={DetailsPage} />
     </div>
   </Router>
 )

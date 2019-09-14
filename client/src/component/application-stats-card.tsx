@@ -60,26 +60,32 @@ class ApplicationStatisticsCard extends
     let negative_applicants: Applicant[] = []
     let positive_applicants_arr = Array.from(positive_applicants_set)
     let negative_applicants_arr = Array.from(negative_applicants_set)
-    for (let v of positive_applicants_arr) {
-      let app = await get_applicant_by_id(v)
-      positive_applicants.push(app)
-    }
-    for (let v of negative_applicants_arr) {
-      let app = await get_applicant_by_id(v)
-      negative_applicants.push(app)
-    }
-    console.log(positive_applicants.map(app => app.bachelor.gpa))
+
+    let proms = positive_applicants_arr.map(async v => {
+      positive_applicants.push(await get_applicant_by_id(v))
+    }).concat(negative_applicants_arr.map(async v => {
+      negative_applicants.push(await get_applicant_by_id(v))
+    }))
+    await Promise.all(proms)
+
+    // for (let v of positive_applicants_arr) {
+    //   let app = await get_applicant_by_id(v)
+    //   positive_applicants.push(app)
+    // }
+    // for (let v of negative_applicants_arr) {
+    //   let app = await get_applicant_by_id(v)
+    //   negative_applicants.push(app)
+    // }
+
     this.setState({
       positive_applications: positive_applications,
       negative_applications: negative_applications,
       positive_applicants: positive_applicants,
       negative_applicants: negative_applicants
     })
-    console.log('new state set')
   }
 
   render() {
-    console.log('render: ', this.state.positive_applicants.map(app => app.bachelor.gpa))
     return (
       <div className="app-stats-card">
         { this.state.positive_applicants && this.state.negative_applicants ?

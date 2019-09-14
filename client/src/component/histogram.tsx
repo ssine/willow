@@ -31,7 +31,6 @@ interface HistogramState {
 
 class Histogram extends React.Component<HistogramProp, HistogramState> {
   constructor(props: HistogramProp) {
-    console.log('histogram init')
     super(props)
     this.state = {
       data: []
@@ -39,8 +38,6 @@ class Histogram extends React.Component<HistogramProp, HistogramState> {
   }
 
   static getDerivedStateFromProps(nextProps: HistogramProp, prevState: HistogramState) {
-    console.log('getDerivedStateFromProps')
-    console.log(nextProps)
     let data_all = nextProps.data_positive.concat(nextProps.data_negative)
     if (data_all.length === 0) return null
     let num_bins = nextProps.num_bins ? nextProps.num_bins : 10
@@ -64,13 +61,10 @@ class Histogram extends React.Component<HistogramProp, HistogramState> {
     let new_stat =  {
       data: idxs.map((val, idx) => {return {x: val, y_pos: pos_cnt[idx], y_neg: neg_cnt[idx]}})
     }
-    console.log(new_stat)
     return new_stat
   }
 
   render() {
-    console.log('histogram update')
-    console.log(this.state.data)
     return (
       <div>
         <h4>{this.props.title}</h4>

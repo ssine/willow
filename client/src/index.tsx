@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom'
 import './style/index.scss'
 import Main from './page/main'
 import UniversityPage  from './page/university-page'
-import DetailsPage  from './page/detail-page'
-import University  from './component/university-card'
+import DetailsPage  from './page/details-page'
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
 
 const routing = (

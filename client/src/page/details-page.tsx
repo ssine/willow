@@ -1,7 +1,5 @@
 import React from 'react'
-import axios from 'axios'
 import { RouteComponentProps } from 'react-router-dom'
-import { api_uri } from '../config'
 import { University, Program } from '../util/type'
 import UniversityCard from '../component/university-card'
 import ProgramCard from '../component/program-card'

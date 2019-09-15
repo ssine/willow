@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './style/index.scss'
-import Main from './page/main'
+import MainPage from './page/main-page'
 import UniversityPage  from './page/university-page'
 import DetailsPage  from './page/details-page'
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
@@ -17,7 +17,7 @@ const routing = (
           <Link to='/universities'>Universities</Link>
         </li>
       </ul>
-      <Route exact path='/' component={Main} />
+      <Route exact path='/' component={MainPage} />
       <Route path='/universities' component={UniversityPage} />
       <Route path='/university/:name/:program?' component={DetailsPage} />
     </div>

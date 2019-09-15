@@ -8,6 +8,7 @@ import { Program, University, Application, Applicant } from '../util/type'
 import GPACard from './gpa-card'
 import GRECard from './gre-card'
 import TOEFLCard from './toefl-card'
+import DetailsCard from './details-card'
 
 interface ApplicationStatisticsCardProp {
   university: University
@@ -63,6 +64,8 @@ class ApplicationStatisticsCard extends
     let positive_applicants_arr = Array.from(positive_applicants_set)
     let negative_applicants_arr = Array.from(negative_applicants_set)
 
+    // TODO: too many concurrent queries may cause performance issue
+    // consider doing this in server side
     let proms = positive_applicants_arr.map(async v => {
       positive_applicants.push(await get_applicant_by_id(v))
     }).concat(negative_applicants_arr.map(async v => {
@@ -101,6 +104,10 @@ class ApplicationStatisticsCard extends
         <TOEFLCard
           positive_TOEFLs={this.state.positive_applicants.map(app => app.TOEFL)}
           negative_TOEFLs={this.state.negative_applicants.map(app => app.TOEFL)}
+        />
+        <DetailsCard 
+          positive_applicants={this.state.positive_applicants}
+          negative_applicants={this.state.negative_applicants}
         />
       </div>
     :

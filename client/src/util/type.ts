@@ -58,23 +58,20 @@ export interface Program {
   website: string
 }
 
+export interface PastUniversity {
+  major: string
+  gpa: GPA
+  university_level: string
+  university: string
+}
+
 export interface Applicant {
   id: string
   diploma: 'bachelor' | 'graduate'
   GRE: GREScore
   TOEFL: TOEFLScore
-  bachelor: {
-    major: string
-    gpa: GPA
-    university_level: string
-    university: string
-  }
-  graduate?: {
-    major: string
-    gpa: GPA
-    university_level: string
-    university: string
-  }
+  bachelor: PastUniversity
+  graduate?: PastUniversity
   background: string
 }
 

@@ -19,7 +19,7 @@ const routing = (
       </ul>
       <Route exact path='/' component={Main} />
       <Route path='/universities' component={UniversityPage} />
-      <Route path='/university/:name' component={DetailsPage} />
+      <Route path='/university/:name/:program?' component={DetailsPage} />
     </div>
   </Router>
 )

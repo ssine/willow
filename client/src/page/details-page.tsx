@@ -2,41 +2,60 @@ import React from 'react'
 import axios from 'axios'
 import { RouteComponentProps } from 'react-router-dom'
 import { api_uri } from '../config'
-import { University } from '../util/type'
+import { University, Program } from '../util/type'
 import UniversityCard from '../component/university-card'
+import ProgramCard from '../component/program-card'
 import ApplicationStatisticsCard from '../component/application-stats-card'
-import { get_university_by_name } from '../util/helper'
+import { get_university_by_name, get_programs_by_university } from '../util/helper'
 
 interface MatchParams {
   name: string
+  program?: string
 }
 
-interface Props extends RouteComponentProps<MatchParams> {
+interface DetailsPageProps extends RouteComponentProps<MatchParams> { }
+
+interface DetailsPageState {
+  university: University | null
+  program: Program | null
 }
 
-class DetailsPage extends React.Component<Props, {university?: University}> {
+class DetailsPage extends React.Component<DetailsPageProps, DetailsPageState> {
   constructor(prop: any) {
     super(prop)
-    this.state = {  }
+    this.state = {
+      university: null,
+      program: null
+    }
   }
 
   async componentDidMount() {
     const { params } = this.props.match
     let uni = await get_university_by_name(params.name)
+    let prog: Program | null = null
+    if (params.program) {
+      let progs = await get_programs_by_university(uni.name)
+      progs.forEach(p => {
+        if (p.name === params.program) prog = p
+      })
+    }
     this.setState({
-      university: uni
+      university: uni,
+      program: prog
     })
   }
 
   render() {
     return (
       <div className="university">
-        <UniversityCard
-          university={this.state.university}
-        />
+        {this.state.university ? <UniversityCard university={this.state.university} /> : null}
+        {this.state.program ? <ProgramCard program={this.state.program} /> : null}
         <br/>
         { this.state.university ?
-          <ApplicationStatisticsCard university={this.state.university} />
+          <ApplicationStatisticsCard
+            university={this.state.university}
+            program={this.state.program}
+          />
           : <div></div>
         }
       </div>

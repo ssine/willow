@@ -24,16 +24,16 @@ class CommentsCard extends React.Component<CommentsCardProp, CommentsCardState> 
     return (
       <div>
         <div className="accepted-comments">
-          {this.props.positive_comments.map(v => (
-            <div className="item">
+          {this.props.positive_comments.map((v, idx) => (
+            <div className="item" key={idx}>
               <div className="author">{v.author}</div>
               <div className="comment">{v.comment}</div>
             </div>
           ))}
         </div>
         <div className="rejected-comments">
-          {this.props.negative_comments.map(v => (
-            <div className="item">
+          {this.props.negative_comments.map((v, idx) => (
+            <div className="item" key={idx}>
               <div className="author">{v.author}</div>
               <div className="comment">{v.comment}</div>
             </div>

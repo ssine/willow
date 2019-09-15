@@ -13,7 +13,7 @@ import CommentsCard from '../component/comments-card'
 
 interface ApplicationStatisticsCardProp {
   university: University
-  program?: Program
+  program: Program | null
 }
 
 interface ApplicationStatisticsCardState {

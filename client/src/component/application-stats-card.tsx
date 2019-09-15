@@ -9,6 +9,7 @@ import GPACard from './gpa-card'
 import GRECard from './gre-card'
 import TOEFLCard from './toefl-card'
 import DetailsCard from './details-card'
+import CommentsCard from '../component/comments-card'
 
 interface ApplicationStatisticsCardProp {
   university: University
@@ -108,6 +109,20 @@ class ApplicationStatisticsCard extends
         <DetailsCard 
           positive_applicants={this.state.positive_applicants}
           negative_applicants={this.state.negative_applicants}
+        />
+        <CommentsCard
+          positive_comments={this.state.positive_applications.map(v => {
+            return {
+              author: v.applicant,
+              comment: v.info
+            }
+          })}
+          negative_comments={this.state.negative_applications.map(v => {
+            return {
+              author: v.applicant,
+              comment: v.info
+            }
+          })}
         />
       </div>
     :

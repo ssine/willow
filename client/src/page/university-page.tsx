@@ -1,6 +1,7 @@
 import React from 'react'
 import { University, Program } from '../util/type'
 import { get_all_universities, get_programs_by_university } from '../util/helper'
+import UniversityList from '../component/university-list'
 
 interface UniversityPageState {
   universities: University[]
@@ -31,24 +32,14 @@ class UniversityPage extends React.Component<{}, UniversityPageState> {
   render() {
     return (
       <div className="university-page">
-        <ul>
-          {this.state.universities.map((u, idx) => 
-            <li key={u.name}>
-              <a href={`/university/${u.name}`}>{u.name}</a>
-              {this.state.programs[idx] === [] ?
-                null
-              :
-                <ul>
-                  {this.state.programs[idx].map(p => 
-                    <li key={p.name}>
-                      <a href={`/university/${u.name}/${p.name}`}>{p.name}</a>
-                    </li>
-                  )}
-                </ul>
-              }
-            </li>
-          )}
-        </ul>
+        <UniversityList
+          universities={this.state.universities.map((u, idx) => {
+            return {
+              name: u.name,
+              programs: this.state.programs[idx].map(p => p.name)
+            }
+          })}
+        />
       </div>
     )
   }

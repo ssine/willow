@@ -10,7 +10,10 @@ import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
 const routing = (
   <Router>
     <div>
-      <NavBar />
+      <NavBar links={[
+        {name: 'Home', url: '/'},
+        {name: 'Universities', url: '/universities'}
+      ]}/>
       <Route exact path='/' component={MainPage} />
       <Route path='/universities' component={UniversityPage} />
       <Route path='/university/:name/:program?' component={DetailsPage} />

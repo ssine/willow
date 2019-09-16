@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.4.2",
+    "@material-ui/icons": "^4.4.1",
     "@types/jest": "24.0.18",
     "@types/lodash": "^4.14.138",
     "@types/node": "12.7.4",

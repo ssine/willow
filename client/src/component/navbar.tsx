@@ -5,6 +5,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import { Link , LinkProps as RouterLinkProps } from 'react-router-dom';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -20,8 +21,8 @@ function TabPanel(props: TabPanelProps) {
       component="div"
       role="tabpanel"
       hidden={value !== index}
-      id={`nav-tabpanel-${index}`}
-      aria-labelledby={`nav-tab-${index}`}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
       <Box p={3}>{children}</Box>
@@ -31,36 +32,19 @@ function TabPanel(props: TabPanelProps) {
 
 function a11yProps(index: any) {
   return {
-    id: `nav-tab-${index}`,
-    'aria-controls': `nav-tabpanel-${index}`,
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
   };
-}
-
-interface LinkTabProps {
-  label?: string;
-  href?: string;
-}
-
-function LinkTab(props: LinkTabProps) {
-  return (
-    <Tab
-      component="a"
-      onClick={(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-        event.preventDefault();
-      }}
-      {...props}
-    />
-  );
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
+    position: 'fixed',
+    zIndex: 2
   },
 }));
 
-export default function NavBar() {
+export default function SimpleTabs(props: {links: {name: string, url: string}[]}) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -69,24 +53,12 @@ export default function NavBar() {
   }
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Tabs
-          variant="fullWidth"
-          value={value}
-          onChange={handleChange}
-          aria-label="nav tabs example"
-        >
-          <LinkTab label="Home" href="/" {...a11yProps(0)} />
-          <LinkTab label="Universities" href="/universities" {...a11yProps(1)} />
+    <div>
+      <AppBar className={classes.root}>
+        <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+          {props.links.map(l => <Tab key={l.name} label={l.name} component={Link} to={l.url} />)}
         </Tabs>
       </AppBar>
-      <TabPanel value={value} index={0}>
-        Home
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        Universities
-      </TabPanel>
     </div>
   );
 }

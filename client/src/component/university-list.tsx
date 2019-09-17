@@ -11,6 +11,7 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import StarBorder from '@material-ui/icons/StarBorder';
 import { IconButton } from '@material-ui/core';
+import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -18,6 +19,7 @@ const useStyles = makeStyles((theme: Theme) =>
       width: '100%',
       maxWidth: 960,
       backgroundColor: theme.palette.background.paper,
+      margin: '0 auto'
     },
     nested: {
       paddingLeft: theme.spacing(4),
@@ -58,17 +60,12 @@ export default function UniversityList(props: UniversityListProp) {
     <List
       component="nav"
       aria-labelledby="nested-list-subheader"
-      subheader={
-        <ListSubheader component="div" id="nested-list-subheader">
-          Nested List Items
-        </ListSubheader>
-      }
       className={classes.root}
     >
       {
         props.universities.map((u, idx) => (
           <div key={idx}>
-            <ListItem button onClick={_ => console.log('nav')}>
+            <ListItem component={Link} to={`/university/${u.name}`} button>
               <ListItemIcon>
                 <InboxIcon />
               </ListItemIcon>

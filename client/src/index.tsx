@@ -14,9 +14,11 @@ const routing = (
         {name: 'Home', url: '/'},
         {name: 'Universities', url: '/universities'}
       ]}/>
+      <div style={{marginTop: "60px"}}>
       <Route exact path='/' component={MainPage} />
       <Route path='/universities' component={UniversityPage} />
       <Route path='/university/:name/:program?' component={DetailsPage} />
+      </div>
     </div>
   </Router>
 )

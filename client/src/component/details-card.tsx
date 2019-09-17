@@ -2,6 +2,7 @@ import React from 'react'
 import { Applicant } from '../util/type'
 import ReactTable from "react-table"
 import "react-table/react-table.css"
+import Card from '@material-ui/core/Card'
 
 interface DetailsCardProp {
   positive_applicants: Applicant[]
@@ -68,7 +69,7 @@ class DetailsCard extends React.Component<DetailsCardProp, DetailsCardState> {
 
   render() {
     return (
-      <div>
+      <Card className='details-card'>
         <h4>Accpeted Applicants</h4>
         <ReactTable
           data={this.state.positive_data}
@@ -189,7 +190,7 @@ class DetailsCard extends React.Component<DetailsCardProp, DetailsCardState> {
           defaultPageSize={20}
           className="-striped -highlight"
         />
-      </div>
+      </Card>
     );
   }
 }

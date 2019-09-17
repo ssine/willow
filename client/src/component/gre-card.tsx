@@ -1,6 +1,8 @@
 import React from 'react'
 import { GREScore } from '../util/type'
 import Histogram from './histogram'
+import Card from '@material-ui/core/Card'
+import Typography from '@material-ui/core/Typography'
 
 interface GRECardProp {
   positive_GREs: GREScore[]
@@ -85,48 +87,60 @@ class GRECard extends React.Component<GRECardProp, GRECardState> {
 
   render() {
     return (
-      <div>
-        <Histogram
-          title="GRE Verbal"
-          data_positive={this.state.verbal.pos}
-          data_negative={this.state.verbal.neg}
-          range={[129.5, 170.5]}
-          num_bins={41}
-          width={500}
-          height={150}
-          margin={{top: 10, right: 10, left: 10, bottom: 10}}
-        />
-        <Histogram
-          title="GRE Quant"
-          data_positive={this.state.quant.pos}
-          data_negative={this.state.quant.neg}
-          range={[129.5, 170.5]}
-          num_bins={41}
-          width={500}
-          height={150}
-          margin={{top: 10, right: 10, left: 10, bottom: 10}}
-        />
-        <Histogram
-          title="GRE AW"
-          data_positive={this.state.AW.pos}
-          data_negative={this.state.AW.neg}
-          range={[-0.25, 6.25]}
-          num_bins={13}
-          width={500}
-          height={150}
-          margin={{top: 10, right: 10, left: 10, bottom: 10}}
-        />
-        <Histogram
-          title="GRE Total"
-          data_positive={this.state.total.pos}
-          data_negative={this.state.total.neg}
-          range={[258.5, 340.5]}
-          num_bins={41*2}
-          width={500}
-          height={150}
-          margin={{top: 10, right: 10, left: 10, bottom: 10}}
-        />
-      </div>
+      <Card className='gre-card'>
+        <div className="histogram">
+
+          <Histogram
+            title="GRE Verbal"
+            data_positive={this.state.verbal.pos}
+            data_negative={this.state.verbal.neg}
+            range={[129.5, 170.5]}
+            num_bins={41}
+            width={500}
+            height={150}
+            margin={{ top: 10, right: 10, left: 10, bottom: 10 }}
+          />
+        </div>
+        <div className="histogram">
+
+          <Histogram
+            title="GRE Quant"
+            data_positive={this.state.quant.pos}
+            data_negative={this.state.quant.neg}
+            range={[129.5, 170.5]}
+            num_bins={41}
+            width={500}
+            height={150}
+            margin={{ top: 10, right: 10, left: 10, bottom: 10 }}
+          />
+        </div>
+        <div className="histogram">
+
+          <Histogram
+            title="GRE AW"
+            data_positive={this.state.AW.pos}
+            data_negative={this.state.AW.neg}
+            range={[-0.25, 6.25]}
+            num_bins={13}
+            width={500}
+            height={150}
+            margin={{ top: 10, right: 10, left: 10, bottom: 10 }}
+          />
+        </div>
+        <div className="histogram">
+
+          <Histogram
+            title="GRE Total"
+            data_positive={this.state.total.pos}
+            data_negative={this.state.total.neg}
+            range={[258.5, 340.5]}
+            num_bins={41 * 2}
+            width={500}
+            height={150}
+            margin={{ top: 10, right: 10, left: 10, bottom: 10 }}
+          />
+        </div>
+      </Card>
     );
   }
 }

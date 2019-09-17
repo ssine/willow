@@ -1,6 +1,8 @@
 import React from 'react'
 import { TOEFLScore } from '../util/type'
 import Histogram from './histogram'
+import Card from '@material-ui/core/Card'
+import Typography from '@material-ui/core/Typography'
 
 interface TOEFLCardProp {
   positive_TOEFLs: TOEFLScore[]
@@ -85,48 +87,60 @@ class TOEFLCard extends React.Component<TOEFLCardProp, TOEFLCardState> {
 
   render() {
     return (
-      <div>
-        <Histogram
-          title="TOEFL Reading"
-          data_positive={this.state.reading.pos}
-          data_negative={this.state.reading.neg}
-          range={[-0.5, 30.5]}
-          num_bins={31}
-          width={500}
-          height={150}
-          margin={{top: 10, right: 10, left: 10, bottom: 10}}
-        />
-        <Histogram
-          title="TOEFL Listening"
-          data_positive={this.state.listening.pos}
-          data_negative={this.state.listening.neg}
-          range={[-0.5, 30.5]}
-          num_bins={31}
-          width={500}
-          height={150}
-          margin={{top: 10, right: 10, left: 10, bottom: 10}}
-        />
-        <Histogram
-          title="TOEFL Speaking"
-          data_positive={this.state.speaking.pos}
-          data_negative={this.state.speaking.neg}
-          range={[-0.5, 30.5]}
-          num_bins={31}
-          width={500}
-          height={150}
-          margin={{top: 10, right: 10, left: 10, bottom: 10}}
-        />
-        <Histogram
-          title="TOEFL Writing"
-          data_positive={this.state.writing.pos}
-          data_negative={this.state.writing.neg}
-          range={[-0.5, 30.5]}
-          num_bins={31}
-          width={500}
-          height={150}
-          margin={{top: 10, right: 10, left: 10, bottom: 10}}
-        />
-      </div>
+      <Card className='toefl-card'>
+        <div className="histogram">
+
+          <Histogram
+            title="TOEFL Reading"
+            data_positive={this.state.reading.pos}
+            data_negative={this.state.reading.neg}
+            range={[-0.5, 30.5]}
+            num_bins={31}
+            width={500}
+            height={150}
+            margin={{ top: 10, right: 10, left: 10, bottom: 10 }}
+          />
+        </div>
+        <div className="histogram">
+
+          <Histogram
+            title="TOEFL Listening"
+            data_positive={this.state.listening.pos}
+            data_negative={this.state.listening.neg}
+            range={[-0.5, 30.5]}
+            num_bins={31}
+            width={500}
+            height={150}
+            margin={{ top: 10, right: 10, left: 10, bottom: 10 }}
+          />
+        </div>
+        <div className="histogram">
+
+          <Histogram
+            title="TOEFL Speaking"
+            data_positive={this.state.speaking.pos}
+            data_negative={this.state.speaking.neg}
+            range={[-0.5, 30.5]}
+            num_bins={31}
+            width={500}
+            height={150}
+            margin={{ top: 10, right: 10, left: 10, bottom: 10 }}
+          />
+        </div>
+        <div className="histogram">
+
+          <Histogram
+            title="TOEFL Writing"
+            data_positive={this.state.writing.pos}
+            data_negative={this.state.writing.neg}
+            range={[-0.5, 30.5]}
+            num_bins={31}
+            width={500}
+            height={150}
+            margin={{ top: 10, right: 10, left: 10, bottom: 10 }}
+          />
+        </div>
+      </Card>
     );
   }
 }

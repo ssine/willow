@@ -1,4 +1,7 @@
 import React from 'react'
+import Card from '@material-ui/core/Card'
+import Grid from '@material-ui/core/Grid'
+import Typography from '@material-ui/core/Typography'
 
 interface CommentsCardProp {
   positive_comments: {
@@ -17,29 +20,35 @@ interface CommentsCardState {
 class CommentsCard extends React.Component<CommentsCardProp, CommentsCardState> {
   constructor(props: CommentsCardProp) {
     super(props)
-    this.state = { }
+    this.state = {}
   }
 
   render() {
     return (
-      <div>
-        <div className="accepted-comments">
+      <Card className='comments'>
+        <Typography variant="h4">Accepted</Typography>
+        <div className="accepted">
           {this.props.positive_comments.map((v, idx) => (
-            <div className="item" key={idx}>
-              <div className="author">{v.author}</div>
-              <div className="comment">{v.comment}</div>
-            </div>
+            <Grid container>
+              <div className="item" key={idx}>
+                <Grid item xs={2} className="author">{v.author}</Grid>
+                <Grid item xs={10} className="comment">{v.comment}</Grid>
+              </div>
+            </Grid>
           ))}
         </div>
-        <div className="rejected-comments">
+        <Typography variant="h4">Rejected</Typography>
+        <div className="rejected">
           {this.props.negative_comments.map((v, idx) => (
-            <div className="item" key={idx}>
-              <div className="author">{v.author}</div>
-              <div className="comment">{v.comment}</div>
-            </div>
+            <Grid container>
+              <div className="item" key={idx}>
+                <Grid item xs={2} className="author">{v.author}</Grid>
+                <Grid item xs={10} className="comment">{v.comment}</Grid>
+              </div>
+            </Grid>
           ))}
         </div>
-      </div>
+      </Card>
     );
   }
 }

@@ -1,17 +1,19 @@
 import React from 'react'
 import { Program } from '../util/type'
+import Card from '@material-ui/core/Card'
+import Typography from '@material-ui/core/Typography'
 
 interface ProgramCardProp {
   program?: Program
 }
 
 const ProgramCard: React.SFC<ProgramCardProp> = props =>
-  <div className="program-card">
+  <Card className="program-card">
     { props.program ?
       <div>
-        <div className="name">
+        <Typography variant="h5" component="h2">
           {`${props.program.name} at ${props.program.university} (${props.program.abbreviations[0]})`}
-        </div>
+        </Typography>
         <div className="requirements">
           <div className="toefl">{JSON.stringify(props.program.TOEFL)}</div>
           <div className="gre">{JSON.stringify(props.program.GRE)}</div>
@@ -24,6 +26,6 @@ const ProgramCard: React.SFC<ProgramCardProp> = props =>
     :
       <p>program not set</p>
     }
-  </div>
+  </Card>
 
 export default ProgramCard

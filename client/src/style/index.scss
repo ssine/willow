@@ -15,3 +15,37 @@ code {
 .university-page {
   margin: 0 auto;
 }
+
+.program-card, .university-card, .comments, .details-card {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 20px;
+  padding: 20px;
+}
+
+.gpa-card, .toefl-card, .gre-card {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 20px;
+  padding: 20px;
+  .histogram {
+    float: left;
+  }
+}
+
+.comments {
+  .accepted, .rejected {
+    .item {
+      margin-top: 10px;
+      width: 90%;
+      .author {
+        width: 10%;
+        float: left;
+      }
+      .comment {
+        width: 90%;
+        float: left;
+      }
+    }
+  }
+}

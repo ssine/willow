@@ -75,7 +75,7 @@ export default function UniversityList(props: UniversityListProp) {
             <Collapse in={expanded[idx]} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
                 {u.programs.map((p, j) => (
-                  <ListItem key={j} button className={classes.nested}>
+                  <ListItem component={Link} to={`/university/${u.name}/${p}`} key={j} button className={classes.nested}>
                     <ListItemIcon>
                       <StarBorder />
                     </ListItemIcon>

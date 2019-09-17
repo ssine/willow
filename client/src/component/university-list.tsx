@@ -65,7 +65,7 @@ export default function UniversityList(props: UniversityListProp) {
       {
         props.universities.map((u, idx) => (
           <div key={idx}>
-            <ListItem component={Link} to={`/university/${u.name}`} button>
+            <ListItem component={Link} to={`/university/${u.name.replace(/\s/g, '-')}`} button>
               <ListItemIcon>
                 <InboxIcon />
               </ListItemIcon>
@@ -75,7 +75,7 @@ export default function UniversityList(props: UniversityListProp) {
             <Collapse in={expanded[idx]} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
                 {u.programs.map((p, j) => (
-                  <ListItem component={Link} to={`/university/${u.name}/${p}`} key={j} button className={classes.nested}>
+                  <ListItem component={Link} to={`/university/${u.name.replace(/\s/g, '-')}/${p.replace(/\s/g, '-')}`} key={j} button className={classes.nested}>
                     <ListItemIcon>
                       <StarBorder />
                     </ListItemIcon>

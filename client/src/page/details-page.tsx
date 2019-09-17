@@ -29,12 +29,12 @@ class DetailsPage extends React.Component<DetailsPageProps, DetailsPageState> {
 
   async componentDidMount() {
     const { params } = this.props.match
-    let uni = await get_university_by_name(params.name)
+    let uni = await get_university_by_name(params.name.replace(/-/g, ' '))
     let prog: Program | null = null
     if (params.program) {
       let progs = await get_programs_by_university(uni.name)
       progs.forEach(p => {
-        if (p.name === params.program) prog = p
+        if (p.name === params.program.replace(/-/g, ' ')) prog = p
       })
     }
     this.setState({

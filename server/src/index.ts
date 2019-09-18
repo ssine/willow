@@ -2,8 +2,10 @@ import * as fs from 'fs'
 import * as express from 'express'
 import * as bodyParser from 'body-parser'
 import { MongoClient, Collection, Db } from 'mongodb'
+import * as cors from 'cors'
 const app = express()
 app.use(bodyParser.json())
+app.use(cors())
 
 const credentials = JSON.parse(fs.readFileSync('credentials.json').toString())
 const config = JSON.parse(fs.readFileSync('config.json').toString())
@@ -15,35 +17,30 @@ let applicant: Collection
 let application: Collection
 
 app.get('/applicant', async (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
   let filter = req.query.filter ? JSON.parse(req.query.filter) : {}
   let results = await applicant.find(filter).toArray()
   res.send(results)
 })
 
 app.get('/application', async (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
   let filter = req.query.filter ? JSON.parse(req.query.filter) : {}
   let results = await application.find(filter).toArray()
   res.send(results)
 })
 
 app.get('/university', async (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
   let filter = req.query.filter ? JSON.parse(req.query.filter) : {}
   let results = await university.find(filter).toArray()
   res.send(results)
 })
 
 app.get('/program', async (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
   let filter = req.query.filter ? JSON.parse(req.query.filter) : {}
   let results = await program.find(filter).toArray()
   res.send(results)
 })
 
 app.put('/applicant', async (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
   if (! req.body.data) {
     res.send('no data')
     return
@@ -65,7 +62,6 @@ app.put('/applicant', async (req, res) => {
 })
 
 app.put('/application', async (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
   if (! req.body.data) {
     res.send('no data')
     return
@@ -87,7 +83,6 @@ app.put('/application', async (req, res) => {
 })
 
 app.put('/university', async (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
   if (! req.body.data) {
     res.send('no data')
     return
@@ -109,7 +104,6 @@ app.put('/university', async (req, res) => {
 })
 
 app.put('/program', async (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
   if (! req.body.data) {
     res.send('no data')
     return

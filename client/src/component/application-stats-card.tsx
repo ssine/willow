@@ -2,7 +2,7 @@ import React from 'react'
 import {
   get_applications_by_university,
   get_applications_by_university_and_program,
-  get_applicant_by_id
+  get_applicants_by_ids
 } from '../util/helper'
 import { Program, University, Application, Applicant } from '../util/type'
 import GPACard from './gpa-card'
@@ -60,28 +60,8 @@ class ApplicationStatisticsCard extends
         negative_applicants_set.add(app.applicant)
       }
     })
-    let positive_applicants: Applicant[] = []
-    let negative_applicants: Applicant[] = []
-    let positive_applicants_arr = Array.from(positive_applicants_set)
-    let negative_applicants_arr = Array.from(negative_applicants_set)
-
-    // TODO: too many concurrent queries may cause performance issue
-    // consider doing this in server side
-    let proms = positive_applicants_arr.map(async v => {
-      positive_applicants.push(await get_applicant_by_id(v))
-    }).concat(negative_applicants_arr.map(async v => {
-      negative_applicants.push(await get_applicant_by_id(v))
-    }))
-    await Promise.all(proms)
-
-    // for (let v of positive_applicants_arr) {
-    //   let app = await get_applicant_by_id(v)
-    //   positive_applicants.push(app)
-    // }
-    // for (let v of negative_applicants_arr) {
-    //   let app = await get_applicant_by_id(v)
-    //   negative_applicants.push(app)
-    // }
+    let positive_applicants = await get_applicants_by_ids(Array.from(positive_applicants_set))
+    let negative_applicants = await get_applicants_by_ids(Array.from(negative_applicants_set))
 
     this.setState({
       positive_applications: positive_applications,

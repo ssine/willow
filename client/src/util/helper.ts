@@ -30,6 +30,14 @@ async function get_programs_by_university(university_name: string): Promise<Prog
   return res.data
 }
 
+async function get_programs_by_universities(university_names: string[]): Promise<Program[][]> {
+  let res = await axios.post(`${api_uri}programs`, {
+    filters: university_names.map(u => `{"university": "${u}"}`)
+  })
+  console.log(university_names, res.data)
+  return res.data
+}
+
 async function get_applicant_by_id(id: string): Promise<Applicant> {
   let res = await axios.get(`${api_uri}applicant`, {
     params: {
@@ -37,6 +45,13 @@ async function get_applicant_by_id(id: string): Promise<Applicant> {
     }
   })
   return res.data[0]
+}
+
+async function get_applicants_by_ids(ids: string[]): Promise<Applicant[]> {
+  let res = await axios.post(`${api_uri}applicants`, {
+    filters: ids.map(i => `{"id": "${i}"}`)
+  })
+  return res.data
 }
 
 async function get_all_applicants(): Promise<Applicant[]> {
@@ -120,6 +135,8 @@ export {
   get_applications_by_university,
   get_applications_by_university_and_program,
   get_applications_by_applicant,
+  get_programs_by_universities,
+  get_applicants_by_ids,
 
   get_histogram_counts,
   linspace

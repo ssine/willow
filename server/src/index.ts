@@ -22,6 +22,16 @@ app.get('/applicant', async (req, res) => {
   res.send(results)
 })
 
+app.post('/applicants', async (req, res) => {
+  let filters: any[] = req.body.filters ? req.body.filters : []
+  let results: any[] = []
+  let proms = filters.map(async (f, idx) => {
+    results[idx] = await applicant.find(JSON.parse(f)).toArray()
+  })
+  await Promise.all(proms)
+  res.send(results)
+})
+
 app.get('/application', async (req, res) => {
   let filter = req.query.filter ? JSON.parse(req.query.filter) : {}
   let results = await application.find(filter).toArray()
@@ -37,6 +47,16 @@ app.get('/university', async (req, res) => {
 app.get('/program', async (req, res) => {
   let filter = req.query.filter ? JSON.parse(req.query.filter) : {}
   let results = await program.find(filter).toArray()
+  res.send(results)
+})
+
+app.post('/programs', async (req, res) => {
+  let filters: any[] = req.body.filters ? req.body.filters : []
+  let results: any[] = []
+  let proms = filters.map(async (f, idx) => {
+    results[idx] = await program.find(JSON.parse(f)).toArray()
+  })
+  await Promise.all(proms)
   res.send(results)
 })
 

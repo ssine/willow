@@ -26,7 +26,7 @@ app.post('/applicants', async (req, res) => {
   let filters: any[] = req.body.filters ? req.body.filters : []
   let results: any[] = []
   let proms = filters.map(async (f, idx) => {
-    results[idx] = await applicant.find(JSON.parse(f)).toArray()
+    results[idx] = (await applicant.find(JSON.parse(f)).toArray())[0]
   })
   await Promise.all(proms)
   res.send(results)

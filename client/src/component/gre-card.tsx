@@ -2,7 +2,6 @@ import React from 'react'
 import { GREScore } from '../util/type'
 import Histogram from './histogram'
 import Card from '@material-ui/core/Card'
-import Typography from '@material-ui/core/Typography'
 
 interface GRECardProp {
   positive_GREs: GREScore[]

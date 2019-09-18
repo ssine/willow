@@ -2,7 +2,6 @@ import React from 'react'
 import { GPA } from '../util/type'
 import Histogram from './histogram'
 import Card from '@material-ui/core/Card'
-import Typography from '@material-ui/core/Typography'
 
 interface GPACardProp {
   positive_GPAs: GPA[]

@@ -2,7 +2,6 @@ import React from 'react'
 import { TOEFLScore } from '../util/type'
 import Histogram from './histogram'
 import Card from '@material-ui/core/Card'
-import Typography from '@material-ui/core/Typography'
 
 interface TOEFLCardProp {
   positive_TOEFLs: TOEFLScore[]

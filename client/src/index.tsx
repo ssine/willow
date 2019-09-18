@@ -5,7 +5,7 @@ import MainPage from './page/main-page'
 import UniversityPage  from './page/university-page'
 import DetailsPage  from './page/details-page'
 import NavBar from './component/navbar'
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
+import { Route, BrowserRouter as Router } from 'react-router-dom'
 
 const routing = (
   <Router>

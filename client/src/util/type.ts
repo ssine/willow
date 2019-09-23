@@ -49,7 +49,7 @@ export interface Program {
     department_code: string
   }
   GPA: {
-    minumum: GPA
+    minimum: GPA
   }
   cost: {
     semester: number

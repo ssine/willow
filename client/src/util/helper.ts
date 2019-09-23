@@ -125,6 +125,22 @@ function linspace(
   return res
 }
 
+function all_attr_is_null(obj: any): boolean {
+  if (typeof obj !== 'object') return false
+  let keys = Object.keys(obj)
+  for (let k of keys) {
+    if (obj[k] === null || obj[k] === undefined)
+      continue
+    if (typeof obj[k] === 'object') {
+      if (!all_attr_is_null(obj[k]))
+      return false
+    } else if (obj[k] !== null || obj[k] !== undefined) {
+      return false
+    }
+  }
+  return true
+}
+
 export {
   get_all_universities,
   get_university_by_name,
@@ -139,5 +155,6 @@ export {
   get_applicants_by_ids,
 
   get_histogram_counts,
-  linspace
+  linspace,
+  all_attr_is_null
 }

@@ -37,6 +37,7 @@ class CommentsCard extends React.Component<CommentsCardProp, CommentsCardState> 
             </Grid>
           ))}
         </div>
+        <br/>
         <Typography variant="h4">Rejected</Typography>
         <div className="rejected">
           {this.props.negative_comments.map((v, idx) => (

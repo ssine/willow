@@ -34,9 +34,9 @@ export interface Program {
   name: string
   abbreviations: string[]
   timeline: {
-    opening: Date | null
-    early_deadline: Date | null
-    fianl_deadline: Date | null
+    opening: string | null
+    early_deadline: string | null
+    final_deadline: string | null
   }
   TOEFL: {
     minimum: TOEFLScore

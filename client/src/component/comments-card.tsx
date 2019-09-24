@@ -29,8 +29,8 @@ class CommentsCard extends React.Component<CommentsCardProp, CommentsCardState> 
         <Typography variant="h4">Accepted</Typography>
         <div className="accepted">
           {this.props.positive_comments.map((v, idx) => (
-            <Grid container>
-              <div className="item" key={idx}>
+            <Grid container key={idx}>
+              <div className="item">
                 <Grid item xs={2} className="author">{v.author}</Grid>
                 <Grid item xs={10} className="comment">{v.comment}</Grid>
               </div>
@@ -41,8 +41,8 @@ class CommentsCard extends React.Component<CommentsCardProp, CommentsCardState> 
         <Typography variant="h4">Rejected</Typography>
         <div className="rejected">
           {this.props.negative_comments.map((v, idx) => (
-            <Grid container>
-              <div className="item" key={idx}>
+            <Grid container key={idx}>
+              <div className="item">
                 <Grid item xs={2} className="author">{v.author}</Grid>
                 <Grid item xs={10} className="comment">{v.comment}</Grid>
               </div>

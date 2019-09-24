@@ -18,7 +18,20 @@ const ProgramCard: React.SFC<ProgramCardProp> = props =>
           {`${props.program.name} (${props.program.abbreviations[0]})`}
           {/* {`${props.program.name} at ${props.program.university} (${props.program.abbreviations[0]})`} */}
         </Typography>
-        <br/>
+        <div className="deadline">
+          {typeof props.program.timeline.opening === 'string' ?
+            <p>opening: {props.program.timeline.opening.substr(0, 10)}</p>
+          :null
+          }
+          {typeof props.program.timeline.early_deadline === 'string' ?
+            <p>early deadline: {props.program.timeline.early_deadline.substr(0, 10)}</p>
+          :null
+          }
+          {typeof props.program.timeline.final_deadline === 'string' ?
+            <p>final deadline: {props.program.timeline.final_deadline.substr(0, 10)}</p>
+          :null
+          }
+        </div>
         <div className="requirements">
           {props.program.TOEFL && !all_attr_is_null(props.program.TOEFL) ?
             <div>

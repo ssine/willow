@@ -32,7 +32,7 @@ class DetailsPage extends React.Component<DetailsPageProps, DetailsPageState> {
     let uni = await get_university_by_name(params.name.replace(/-/g, ' '))
     let prog: Program | null = null
     if (params.program) {
-      let prog_name = params.program.replace(/-/g, ' ')
+      let prog_name = params.program.replace(/-/g, ' ').replace(/_/g, '/')
       let progs = await get_programs_by_university(uni.name)
       progs.forEach(p => {
         if (p.name === prog_name) prog = p

@@ -129,7 +129,7 @@ function all_attr_is_null(obj: any): boolean {
   if (typeof obj !== 'object') return false
   let keys = Object.keys(obj)
   for (let k of keys) {
-    if (obj[k] === null || obj[k] === undefined)
+    if (obj[k] === null || obj[k] === undefined || obj[k] === '')
       continue
     if (typeof obj[k] === 'object') {
       if (!all_attr_is_null(obj[k]))

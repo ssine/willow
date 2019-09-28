@@ -52,6 +52,7 @@ const ProgramCard: React.SFC<ProgramCardProp> = props =>
                 {props.program.TOEFL.institution_code ? <p>institution code: {props.program.TOEFL.institution_code}</p> : null} 
                 {props.program.TOEFL.department_code ? <p>department code: {props.program.TOEFL.department_code}</p> : null} 
               </Typography>
+              <br/>
             </div>
           :null
           }
@@ -73,6 +74,7 @@ const ProgramCard: React.SFC<ProgramCardProp> = props =>
                 {props.program.GRE.institution_code ? <p>institution code: {props.program.GRE.institution_code}</p> : null} 
                 {props.program.GRE.department_code ? <p>department code: {props.program.GRE.department_code}</p> : null} 
               </Typography>
+              <br/>
             </div>
           :null
           }
@@ -91,6 +93,7 @@ const ProgramCard: React.SFC<ProgramCardProp> = props =>
                   ]]}
                 />
               </Typography>
+              <br/>
             </div>
           :null
           }

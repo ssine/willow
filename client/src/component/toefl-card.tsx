@@ -25,6 +25,10 @@ interface TOEFLCardState {
     pos: number[]
     neg: number[]
   }
+  total: {
+    pos: number[]
+    neg: number[]
+  }
 }
 
 class TOEFLCard extends React.Component<TOEFLCardProp, TOEFLCardState> {
@@ -44,6 +48,10 @@ class TOEFLCard extends React.Component<TOEFLCardProp, TOEFLCardState> {
         neg: []
       },
       writing: {
+        pos: [],
+        neg: []
+      },
+      total: {
         pos: [],
         neg: []
       }
@@ -67,6 +75,10 @@ class TOEFLCard extends React.Component<TOEFLCardProp, TOEFLCardState> {
       writing: {
         pos: [],
         neg: []
+      },
+      total: {
+        pos: [],
+        neg: []
       }
     }
     nextProps.positive_TOEFLs.forEach(g => {
@@ -74,12 +86,14 @@ class TOEFLCard extends React.Component<TOEFLCardProp, TOEFLCardState> {
       if (g.listening) new_state.listening.pos.push(g.listening)
       if (g.speaking) new_state.speaking.pos.push(g.speaking)
       if (g.writing) new_state.writing.pos.push(g.writing)
+      if (g.total) new_state.total.pos.push(g.total)
     })
     nextProps.negative_TOEFLs.forEach(g => {
       if (g.reading) new_state.reading.neg.push(g.reading)
       if (g.listening) new_state.listening.neg.push(g.listening)
       if (g.speaking) new_state.speaking.neg.push(g.speaking)
       if (g.writing) new_state.writing.neg.push(g.writing)
+      if (g.total) new_state.total.neg.push(g.total)
     })
     return new_state
   }
@@ -134,6 +148,19 @@ class TOEFLCard extends React.Component<TOEFLCardProp, TOEFLCardState> {
             data_negative={this.state.writing.neg}
             range={[-0.5, 30.5]}
             num_bins={31}
+            width={500}
+            height={150}
+            margin={{ top: 10, right: 10, left: 10, bottom: 10 }}
+          />
+        </div>
+        <div className="histogram">
+
+          <Histogram
+            title="TOEFL Total"
+            data_positive={this.state.total.pos}
+            data_negative={this.state.total.neg}
+            range={[59.5, 120.5]}
+            num_bins={61}
             width={500}
             height={150}
             margin={{ top: 10, right: 10, left: 10, bottom: 10 }}

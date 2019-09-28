@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
 interface UniversityListProp {
   universities: {
     name: string
+    rank?: number
     programs: string[]
   }[]
 }
@@ -41,13 +42,19 @@ interface UniversityListState {
 export default function UniversityList(props: UniversityListProp) {
   const classes = useStyles()
 
-  const [expanded, setExpanded] = React.useState(props.universities.map(v => false));
+  let sorted_univ = props.universities.sort((a, b) => {
+    if (!a.rank) a.rank = 999
+    if (!b.rank) b.rank = 999
+    return a.rank - b.rank
+  })
+
+  const [expanded, setExpanded] = React.useState(sorted_univ.map(v => false));
 
   React.useEffect(() => {
-    if (expanded.length !== props.universities.length) {
-      setExpanded(props.universities.map(v => false))
+    if (expanded.length !== sorted_univ.length) {
+      setExpanded(sorted_univ.map(v => false))
     }
-  }, [expanded.length, props.universities])
+  }, [expanded.length, sorted_univ])
 
   function on_click(idx: number) {
     expanded[idx] = ! expanded[idx]
@@ -62,15 +69,22 @@ export default function UniversityList(props: UniversityListProp) {
       className={classes.root}
     >
       {
-        props.universities.map((u, idx) => (
+        sorted_univ.map((u, idx) => (
           <div key={idx}>
+
             <ListItem component={Link} to={`/university/${u.name.replace(/\s/g, '-')}`} button>
               <ListItemIcon>
                 <InboxIcon />
               </ListItemIcon>
               <ListItemText primary={u.name} />
-              {u.programs.length > 0 ? <IconButton onMouseDown={e => {on_click(idx); e.stopPropagation(); e.preventDefault()}}>{(expanded[idx] ? <ExpandLess />: <ExpandMore />)}</IconButton> : null}
+              {u.programs.length > 0 ?
+                <IconButton onMouseDown={e => {on_click(idx); e.stopPropagation(); e.preventDefault()}}>
+                  {(expanded[idx] ? <ExpandLess />: <ExpandMore />)}
+                </IconButton>
+              : null
+              }
             </ListItem>
+
             <Collapse in={expanded[idx]} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
                 {u.programs.map((p, j) => (
@@ -83,6 +97,7 @@ export default function UniversityList(props: UniversityListProp) {
                 ))}
               </List>
             </Collapse>
+
           </div>
         ))
       }

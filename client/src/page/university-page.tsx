@@ -33,7 +33,8 @@ class UniversityPage extends React.Component<{}, UniversityPageState> {
           universities={this.state.universities.map((u, idx) => {
             return {
               name: u.name,
-              programs: this.state.programs[idx].map(p => p.name)
+              programs: this.state.programs[idx].map(p => p.name),
+              rank: u.csrankings_rank
             }
           })}
         />
